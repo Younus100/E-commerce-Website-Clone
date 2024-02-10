@@ -1,4 +1,4 @@
-package com.project.ecommerce_youtube.service;
+package com.project.ecommerce_youtube.serviceImpl;
 
 import com.project.ecommerce_youtube.Reository.CartRepository;
 import com.project.ecommerce_youtube.exception.ProductException;
@@ -7,6 +7,9 @@ import com.project.ecommerce_youtube.model.CartItems;
 import com.project.ecommerce_youtube.model.Product;
 import com.project.ecommerce_youtube.model.User;
 import com.project.ecommerce_youtube.request.AddItemRequest;
+import com.project.ecommerce_youtube.service.CartItemService;
+import com.project.ecommerce_youtube.service.CartService;
+import com.project.ecommerce_youtube.service.ProductService;
 import org.springframework.stereotype.Service;
 
 @Service

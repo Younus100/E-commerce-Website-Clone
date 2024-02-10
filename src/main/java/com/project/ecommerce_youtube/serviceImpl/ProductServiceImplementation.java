@@ -1,4 +1,4 @@
-package com.project.ecommerce_youtube.service;
+package com.project.ecommerce_youtube.serviceImpl;
 
 import com.project.ecommerce_youtube.Reository.CategoryRepository;
 import com.project.ecommerce_youtube.Reository.ProductRepository;
@@ -6,6 +6,7 @@ import com.project.ecommerce_youtube.exception.ProductException;
 import com.project.ecommerce_youtube.model.Category;
 import com.project.ecommerce_youtube.model.Product;
 import com.project.ecommerce_youtube.request.CreateProductRequest;
+import com.project.ecommerce_youtube.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class ProductServiceImplementation implements ProductService{
+public class ProductServiceImplementation implements ProductService {
 
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
@@ -71,7 +72,7 @@ public class ProductServiceImplementation implements ProductService{
         product.setCategory(category3);
         product.setCreatedAt(req.getCreatedAt());
 
-        Product savesProdeect = productRepository.save(product);
+        Product savesProduct = productRepository.save(product);
 
         return product;
     }
@@ -81,7 +82,7 @@ public class ProductServiceImplementation implements ProductService{
         Product product = productRepository.findProductById(productId);
         product.getSizes().clear();
         productRepository.delete(product);
-        return "Product Deletefd Successfllt";
+        return "Product Deleted Successfully";
     }
 
     @Override

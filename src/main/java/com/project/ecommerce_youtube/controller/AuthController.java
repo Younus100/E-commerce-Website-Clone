@@ -1,15 +1,13 @@
 package com.project.ecommerce_youtube.controller;
 
 import com.project.ecommerce_youtube.Reository.UserRepository;
-import com.project.ecommerce_youtube.config.JwtProvider;
+//import com.project.ecommerce_youtube.config.JwtProvider;
 import com.project.ecommerce_youtube.exception.UserException;
 import com.project.ecommerce_youtube.model.User;
 import com.project.ecommerce_youtube.request.LoginRequest;
 import com.project.ecommerce_youtube.response.AuthResponse;
-import com.project.ecommerce_youtube.service.CustomerServiceImplementation;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.project.ecommerce_youtube.serviceImpl.CustomerServiceImplementation;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

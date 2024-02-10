@@ -51,8 +51,10 @@ public class Product {
 
     private LocalDate createdAt;
 
+    //Default constructor
     public Product()  {   }
 
+    //parameterised constructor
     public Product(Long id, String title, String description, int price, int discountedPrice, int discountPresent, int quantity, String brand, String color, Set<Size> sizes, String imageUrl, List<Rating> ratings, List<Review> review, int numRatings, Category category, LocalDate createdAt) {
         this.id = id;
         this.title = title;

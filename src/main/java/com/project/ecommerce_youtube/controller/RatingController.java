@@ -1,23 +1,43 @@
 package com.project.ecommerce_youtube.controller;
 
+import com.project.ecommerce_youtube.exception.ProductException;
+import com.project.ecommerce_youtube.model.Rating;
+import com.project.ecommerce_youtube.model.User;
 import com.project.ecommerce_youtube.request.RatingRequest;
-import com.project.ecommerce_youtube.request.ReviewRequest;
-import com.project.ecommerce_youtube.service.ReviewServiceImplementation;
+import com.project.ecommerce_youtube.service.RatingService;
+import com.project.ecommerce_youtube.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping
+@RestController
+@RequestMapping("/ratings")
 public class RatingController {
-    ReviewServiceImplementation reviewServiceImplementation;
 
-    getReviewUsr(@RequestBody User,)
-    {
+    @Autowired
+    private final RatingService ratingService;
+    @Autowired
+    private final UserService userService;
 
+    public RatingController(RatingService ratingService, UserService userService) {
+        this.ratingService = ratingService;
+        this.userService = userService;
     }
-    addReviewUSer(@RequestBody User,@RequestBody Review review) {
-        ReviewRequest request = RatingRequest();
-        request.setReview(review.getReview());
 
-        reviewServiceImplementation.createReview ( request ,user)
+    @PostMapping("/create")
+    public ResponseEntity<Rating> createRating(@RequestBody RatingRequest ratingRequest) {
+        try {
+            User user = new User();
+            user.setId(1L);
+            // Call the rating service to create a new rating
+            Rating rating = ratingService.createRating(ratingRequest, user);
+            return ResponseEntity.ok(rating);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 }

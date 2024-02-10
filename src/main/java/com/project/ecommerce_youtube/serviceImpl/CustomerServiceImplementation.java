@@ -1,4 +1,4 @@
-package com.project.ecommerce_youtube.service;
+package com.project.ecommerce_youtube.serviceImpl;
 
 import com.project.ecommerce_youtube.Reository.UserRepository;
 import com.project.ecommerce_youtube.model.User;

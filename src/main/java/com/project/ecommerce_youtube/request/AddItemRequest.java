@@ -6,6 +6,16 @@ public class AddItemRequest {
     private int quantity;
     private Integer price;
 
+    public AddItemRequest() {
+    }
+
+    public AddItemRequest(Long productId, String size, int quantity, Integer price) {
+        this.productId = productId;
+        this.size = size;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public Long getProductId() {
         return productId;
     }
@@ -38,6 +48,5 @@ public class AddItemRequest {
         this.price = price;
     }
 
-    public AddItemRequest() {
-    }
+
 }

@@ -1,4 +1,4 @@
-package com.project.ecommerce_youtube.service;
+package com.project.ecommerce_youtube.serviceImpl;
 
 import com.project.ecommerce_youtube.Reository.ReviewRepository;
 import com.project.ecommerce_youtube.exception.ProductException;
@@ -6,6 +6,8 @@ import com.project.ecommerce_youtube.model.Product;
 import com.project.ecommerce_youtube.model.Review;
 import com.project.ecommerce_youtube.model.User;
 import com.project.ecommerce_youtube.request.ReviewRequest;
+import com.project.ecommerce_youtube.service.ProductService;
+import com.project.ecommerce_youtube.service.ReviewService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,7 +15,7 @@ import java.util.List;
 
 
 @Service
-public class ReviewServiceImplementation implements  ReviewService {
+public class ReviewServiceImplementation implements ReviewService {
 
 
     private ReviewRepository reviewRepository;
