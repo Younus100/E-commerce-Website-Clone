@@ -19,7 +19,7 @@ public class Review {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "user_iid")
+    @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 

@@ -8,16 +8,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping
 public class RatingController {
-    ReviewServiceImplementation reviewServiceImplementation;
 
-    getReviewUsr(@RequestBody User,)
-    {
-
-    }
-    addReviewUSer(@RequestBody User,@RequestBody Review review) {
-        ReviewRequest request = RatingRequest();
-        request.setReview(review.getReview());
-
-        reviewServiceImplementation.createReview ( request ,user)
-    }
 }

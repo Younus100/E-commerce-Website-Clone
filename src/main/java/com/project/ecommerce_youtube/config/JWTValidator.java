@@ -11,12 +11,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class JWTValidator extends OncePerRequestFilter {
 
@@ -33,8 +38,14 @@ public class JWTValidator extends OncePerRequestFilter {
                 SecretKey secretKey = JWTConstants.SECRET_KEY;
                 Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(jwt).getBody();
                 String email = String.valueOf(claims.get("email"));
-                String authorities = String.valueOf(claims.get("authoroties"));
-                Authentication authentication = new UsernamePasswordAuthenticationToken(email, authorities);
+                String authorities = String.valueOf(claims.get("authorities"));
+                String[] authoritiesArray = authorities.split(",");
+                List<GrantedAuthority> authorityList = Arrays.stream(authoritiesArray)
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+
+                Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, authorityList);
+
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (Exception e) {
                 // Handle token validation exception
