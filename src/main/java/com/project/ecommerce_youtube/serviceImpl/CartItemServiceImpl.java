@@ -1,4 +1,4 @@
-package com.project.ecommerce_youtube.service;
+package com.project.ecommerce_youtube.serviceImpl;
 
 import com.project.ecommerce_youtube.Reository.CartItemRepository;
 import com.project.ecommerce_youtube.Reository.CartRepository;
@@ -8,17 +8,19 @@ import com.project.ecommerce_youtube.model.Cart;
 import com.project.ecommerce_youtube.model.CartItems;
 import com.project.ecommerce_youtube.model.Product;
 import com.project.ecommerce_youtube.model.User;
+import com.project.ecommerce_youtube.service.CartItemService;
+import com.project.ecommerce_youtube.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class CartItemServiceImplementation implements CartItemService {
+public class CartItemServiceImpl implements CartItemService {
     private CartItemRepository cartItemRepository ;
     private UserService userService;
     private CartRepository cartRepository;
 
-    public CartItemServiceImplementation(CartItemRepository cartItemRepository, UserService userService, CartRepository cartRepository) {
+    public CartItemServiceImpl(CartItemRepository cartItemRepository, UserService userService, CartRepository cartRepository) {
         this.cartItemRepository = cartItemRepository;
         this.userService = userService;
         this.cartRepository = cartRepository;
@@ -79,3 +81,4 @@ public class CartItemServiceImplementation implements CartItemService {
         return cartItem.get();
     }
 }
+
