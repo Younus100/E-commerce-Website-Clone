@@ -1,5 +1,6 @@
 package com.project.ecommerce_youtube.Reository;
 
+import com.project.ecommerce_youtube.model.Category;
 import com.project.ecommerce_youtube.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +28,6 @@ public interface ProductRepository  extends JpaRepository<Product,Long> {
 
 
     Product findProductById(Long productId);
+
+    List<Product> findByCategory(Category category);;
 }

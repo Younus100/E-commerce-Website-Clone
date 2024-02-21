@@ -1,0 +1,95 @@
+{
+  "brand": "Varsache",
+  "color": "Black",
+  "discount_present": 20,
+  "discounted_price": 160,
+  "price": 200,
+  "quantity": 50,
+  "title": "Varshache  Kurti",
+  "sizes": [
+    {
+      "quantity": 5,
+      "name": "S"
+    },
+    {
+      "quantity": 10,
+      "name": "M"
+    }
+  ],
+  "topLevelCategory": "Womens",
+  "secondLevelCategory": "Clothing",
+  "thirdLevelCategory": "Kurti",
+  "description": "Kurti by Varsacha"
+}
+
+{
+  "brand": "Varsache",
+  "color": "Blue",
+  "discount_present": 20,
+  "discounted_price": 160,
+  "price": 200,
+  "quantity": 50,
+  "title": "Varshache  Kurti",
+  "sizes": [
+    {
+      "quantity": 5,
+      "name": "S"
+    },
+    {
+      "quantity": 10,
+      "name": "M"
+    }
+  ],
+  "topLevelCategory": "Womens",
+  "secondLevelCategory": "Clothing",
+  "thirdLevelCategory": "Kurti",
+  "description": "Kurti by Varsacha"
+}
+
+{
+  "brand": "Varsache",
+  "color": "Black",
+  "discount_present": 20,
+  "discounted_price": 160,
+  "price": 200,
+  "quantity": 50,
+  "title": "Varshache  Kurti",
+  "sizes": [
+    {
+      "quantity": 5,
+      "name": "S"
+    },
+    {
+      "quantity": 10,
+      "name": "M"
+    }
+  ],
+  "topLevelCategory": "Womens",
+  "secondLevelCategory": "Clothing",
+  "thirdLevelCategory": "Kurti",
+  "description": "Kurti by Varsacha"
+}
+
+{
+  "brand": "Varsache",
+  "color": "Black",
+  "discount_present": 20,
+  "discounted_price": 160,
+  "price": 200,
+  "quantity": 50,
+  "title": "Varshache  Kurti",
+  "sizes": [
+    {
+      "quantity": 5,
+      "name": "S"
+    },
+    {
+      "quantity": 10,
+      "name": "M"
+    }
+  ],
+  "topLevelCategory": "Womens",
+  "secondLevelCategory": "Clothing",
+  "thirdLevelCategory": "Kurti",
+  "description": "Kurti by Varsacha"
+}

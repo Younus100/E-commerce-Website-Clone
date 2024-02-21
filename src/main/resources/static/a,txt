@@ -1,0 +1,143 @@
+-- Top-Level Categories
+INSERT INTO category (id,level, name, parent_category_id) VALUES
+    (1,1, 'Men', NULL),
+    (2,1, 'Women', NULL);
+
+-- Second-Level Categories (Under Men)
+INSERT INTO category (id,level, name, parent_category_id) VALUES
+    (3,2, 'T-Shirts', 1),
+    (4,2, 'Pants',1),
+    (5,2, 'Shirts', 1);
+
+-- Second-Level Categories (Under Women)
+INSERT INTO category (id ,level, name, parent_category_id) VALUES
+    (6,2, 'Dresses', 2),
+    (7,2, 'Skirts', 2),
+    (8,2, 'Blouses', 2);
+
+
+
+//JSON to add product
+{
+  "brand": "Louis",
+  "color": "Blue",
+  "discount_present": 10,
+  "discounted_price": 90,
+  "price": 100,
+  "quantity": 50,
+  "title": "Louis Shirt",
+  "sizes": [
+    {
+      "quantity": 5,
+      "name": "S"
+    },
+    {
+      "quantity": 10,
+      "name": "M"
+    }
+  ],
+  "topLevelCategory": "Mens",
+  "secondLevelCategory": "Clothing",
+  "thirdLevelCategory": "Shirts",
+  "description": "Casual Shirts for u that make you glow"
+}
+
+
+{
+  "brand": "Reebok",
+  "color": "Red",
+  "discount_present": 10,
+  "discounted_price": 360,
+  "price": 400,
+  "quantity": 50,
+  "title": "Reebok Shirt",
+  "sizes": [
+    {
+      "quantity": 5,
+      "name": "S"
+    },
+    {
+      "quantity": 10,
+      "name": "M"
+    }
+  ],
+  "topLevelCategory": "Mens",
+  "secondLevelCategory": "Clothing",
+  "thirdLevelCategory": "Shirts",
+  "description": "Casual Shirts for u that make you glow"
+}
+
+{
+  "brand": "Blut",
+  "color": "Blue",
+  "discount_present": 20,
+  "discounted_price": 320,
+  "price": 400,
+  "quantity": 50,
+  "title": "Blut Shirt",
+  "sizes": [
+    {
+      "quantity": 5,
+      "name": "S"
+    },
+    {
+      "quantity": 10,
+      "name": "M"
+    }
+  ],
+  "topLevelCategory": "Mens",
+  "secondLevelCategory": "Clothing",
+  "thirdLevelCategory": "Shirts",
+  "description": "Shirts by Blut"
+}
+
+{
+  "brand": "Louis",
+  "color": "Black",
+  "discount_present": 20,
+  "discounted_price": 160,
+  "price": 200,
+  "quantity": 50,
+  "title": "Louis Shirt",
+  "sizes": [
+    {
+      "quantity": 5,
+      "name": "S"
+    },
+    {
+      "quantity": 10,
+      "name": "M"
+    }
+  ],
+  "topLevelCategory": "Mens",
+  "secondLevelCategory": "Clothing",
+  "thirdLevelCategory": "Shirts",
+  "description": "Shirts by Blut"
+}
+
+{
+  "brand": "Reebok",
+  "color": "Black",
+  "discount_present": 20,
+  "discounted_price": 160,
+  "price": 200,
+  "quantity": 50,
+  "title": "Louis Shirt",
+  "sizes": [
+    {
+      "quantity": 5,
+      "name": "S"
+    },
+    {
+      "quantity": 10,
+      "name": "M"
+    }
+  ],
+  "topLevelCategory": "Mens",
+  "secondLevelCategory": "Clothing",
+  "thirdLevelCategory": "Shirts",
+  "description": "Shirts by Reebok"
+}
+
+Louis
+url for image: -

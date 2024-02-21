@@ -34,4 +34,9 @@ public class UserServiceImplementation implements UserService {
         if(user==null) {  throw  new UserException("User not found by Email"+email); }
         return user;
     }
+
+    @Override
+    public Long findUserByEmail(String email) throws UserException {
+        return  userRepository.findUserIdByEmail(email);
+    }
 }

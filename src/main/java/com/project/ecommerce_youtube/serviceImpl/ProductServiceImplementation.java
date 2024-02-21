@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,31 +33,33 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public Product createProduct(CreateProductRequest req) {
-        Category category =  categoryRepository.findByName(req.getTopLevelcategoty());
+        Category category =  categoryRepository.findByName(req.getTopLevelCategory());
         if(category==null){
             Category LevelCategory = new Category();
             LevelCategory.setLevel(1);
-            LevelCategory.setName(req.getTopLevelcategoty());
+            LevelCategory.setName(req.getTopLevelCategory());
 
             category = categoryRepository.save(LevelCategory);
         }
 
-        Category category2 =  categoryRepository.findByNameAndParent(req.getSecondLevelCategory(),category.getName());
-        if(category2==null){
-            Category LevelCategory = new Category();
-            LevelCategory.setLevel(1);
-            LevelCategory.setName(req.getTopLevelcategoty());
+        Category category2 = categoryRepository.findByNameAndParent(req.getSecondLevelCategory(), category.getName());
+        if (category2 == null) {
+            Category secondLevelCategory = new Category();
+            secondLevelCategory.setLevel(2);
+            secondLevelCategory.setName(req.getSecondLevelCategory());
+            secondLevelCategory.setParentCategory(category);// Use getSecondLevelCategory()
 
-            category2 = categoryRepository.save(LevelCategory);
+            category2 = categoryRepository.save(secondLevelCategory);
         }
 
-        Category category3 =  categoryRepository.findByNameAndParent(req.getThirdLevelCategory(),category2.getName());
-        if(category3==null){
-            Category topLevelCategory = new Category();
-            topLevelCategory.setLevel(1);
-            topLevelCategory.setName(req.getTopLevelcategoty());
+        Category category3 = categoryRepository.findByNameAndParent(req.getThirdLevelCategory(), category2.getName());
+        if (category3 == null) {
+            Category thirdLevelCategory = new Category();
+            thirdLevelCategory.setLevel(3);
+            thirdLevelCategory.setName(req.getThirdLevelCategory()); // Use getThirdLevelCategory()
+            thirdLevelCategory.setParentCategory(category2);// Use getSecondLevelCategory()
 
-            category3 = categoryRepository.save(topLevelCategory);
+            category3 = categoryRepository.save(thirdLevelCategory);
         }
 
         Product product = new Product();
@@ -70,7 +74,8 @@ public class ProductServiceImplementation implements ProductService {
         product.setQuantity(req.getQuantity());
         product.setSizes(req.getSizes());
         product.setCategory(category3);
-        product.setCreatedAt(req.getCreatedAt());
+
+        product.setCreatedAt(LocalDate.now());
 
         Product savesProduct = productRepository.save(product);
 
@@ -103,8 +108,34 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public List<Product> findproductByCategory(String categoty) throws ProductException {
-        return null;
+    public List<Product> findproductByCategory(String category) throws ProductException {
+        // Retrieve the category from the repository
+        Category categoryEntity = categoryRepository.findByName(category);
+        List<Category> categories = new ArrayList<>();
+        List<Category> full = new ArrayList<>();
+        if (categoryEntity != null) {
+            if(categoryEntity.getLevel()==1) {
+                categories = categoryRepository.findAllWithParentCategory(categoryEntity);
+                for(Category c : categories){
+                    List<Category> temp = new ArrayList<>();
+                    temp = categoryRepository.findAllWithParentCategory(c);
+                    full.addAll(temp);
+                }
+            } else if(categoryEntity.getLevel()==2) {
+                full = categoryRepository.findAllWithParentCategory(categoryEntity);
+            }
+
+            List<Product> products = new ArrayList<>();
+            // If the category exists, query for products with the specified category
+            for(Category c:full){
+                List<Product> temp =  productRepository.findByCategory(c);
+                products.addAll(temp);
+            }
+            return products;
+        } else {
+            // Handle the case where the category does not exist
+            throw new ProductException("Category not found: " + category);
+        }
     }
 
     @Override
