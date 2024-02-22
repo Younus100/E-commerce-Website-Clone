@@ -2,6 +2,7 @@ package com.project.ecommerce_youtube.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.boot.jackson.JsonComponent;
@@ -12,10 +13,10 @@ import java.util.List;
 @Entity
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
 
-    @NotNull
+    @NotEmpty
     @Size(max=50)
     private String name;
 

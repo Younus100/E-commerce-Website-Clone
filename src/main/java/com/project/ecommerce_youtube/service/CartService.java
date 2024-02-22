@@ -8,8 +8,11 @@ import com.project.ecommerce_youtube.model.User;
 public interface CartService {
 
     Cart createCart(User user);  //idhar cart user lega ki cart lega
-    String addCartItem(Long userId, AddItemRequest req) throws ProductException;
+    String addCartItem(Long userId, AddItemRequest req) throws Exception;
 
     Cart findUserCart(Long userId);
 
-}
+    public void clearCart(Long userId);
+
+
+    }

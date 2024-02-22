@@ -31,27 +31,27 @@ public class CartController {
     @PostMapping("/add-item/{userId}")
     public ResponseEntity<String> addCartItemToCart(@RequestBody AddItemRequest req) {
         try {
-
-            String result = cartService.addCartItem(getUserIdFromAuthentication(), req);
+            String result = cartService.addCartItem(req.getUserId(), req);
             return ResponseEntity.ok(result);
-        } catch (ProductException | UserException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    private Long getUserIdFromAuthentication() throws UserException {
+  /*  private Long getUserIdFromAuthentication() throws UserException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // Extract user ID from your custom UserDetailsService or UserDetails implementation
         // For example, assuming UserDetails is a custom class implementing UserDetails
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String email =  userDetails.getUsername(); // Adjust this based on your UserDetails implementation
         return userService.findUserByEmail(email);
-    }
+    }*/
 
     @GetMapping("/getcart")
-    public ResponseEntity<Cart> findUserCart() {
+    public ResponseEntity<Cart> findUserCart(@RequestParam("id") long userId) {
         try {
-            Cart result = cartService.findUserCart(getUserIdFromAuthentication());
+//            Cart result = cartService.findUserCart(getUserIdFromAuthentication());
+            Cart result = cartService.findUserCart(userId);
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);

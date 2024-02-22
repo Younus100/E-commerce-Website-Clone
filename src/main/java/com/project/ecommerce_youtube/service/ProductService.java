@@ -20,4 +20,7 @@ public interface ProductService {
 
     Page<Product> getAllProduct(String categoty, List<String> colors, List<String> sizes, Integer minPrice, Integer maxPrice,
                                 Integer minDiscount, String sort, String stock, Integer pageNumber, Integer pageSize);
+
+    public void updateProductP(Product product);
+
 }

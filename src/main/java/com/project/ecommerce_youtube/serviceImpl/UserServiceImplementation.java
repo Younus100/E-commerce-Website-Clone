@@ -39,4 +39,15 @@ public class UserServiceImplementation implements UserService {
     public Long findUserByEmail(String email) throws UserException {
         return  userRepository.findUserIdByEmail(email);
     }
+
+    @Override
+    public void createUser(User user) throws UserException {
+        // Check if the user already exists
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new UserException("User with email " + user.getEmail() + " already exists");
+        }
+
+        // If the user does not exist, save it to the database
+        userRepository.save(user);
+    }
 }

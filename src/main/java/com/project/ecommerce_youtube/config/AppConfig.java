@@ -24,7 +24,7 @@ public class AppConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests(authorize -> authorize
                         .requestMatchers("/pub/**").permitAll()
-                        .requestMatchers("/api/**").authenticated() // Fix the method name to authorizeRequests
+                        .requestMatchers("/api/**").permitAll() // Fix the method name to authorizeRequests
                         .anyRequest().permitAll())
                 .addFilterBefore(new JWTValidator(), BasicAuthenticationFilter.class) // You need to replace null with your custom filter
                 .csrf().disable()

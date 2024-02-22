@@ -7,9 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EcommerceYoutubeApplication {
 
 	public static void main(String[] args) {
-		System.out.println("project started");
 
 		SpringApplication.run(EcommerceYoutubeApplication.class, args);
+
+		System.out.println("project started");
+
 	}
 
 }
