@@ -14,4 +14,7 @@ public interface UserService {
 
     public Long findUserByEmail(String email) throws UserException;
 
+    void createUser(User user) throws UserException;
+
+
 }

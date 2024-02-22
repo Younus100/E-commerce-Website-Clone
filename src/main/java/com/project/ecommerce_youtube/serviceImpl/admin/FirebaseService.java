@@ -30,7 +30,7 @@ public class FirebaseService {
 //    }
 
     public String uploadImage(MultipartFile file) throws IOException {
-        FileInputStream serviceAccount =
+        /*FileInputStream serviceAccount =
                 new FileInputStream("config/serviceAccountKey.json");
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
         StorageOptions storageOptions = StorageOptions.newBuilder().setCredentials(credentials).build();
@@ -49,7 +49,8 @@ public class FirebaseService {
         Blob blob = storage.create(blobInfo, file.getBytes());
 
         // Get the public URL of the uploaded file
-        return fileName;
+        return fileName;*/
+        return "";
     }
 
     private String generateUniqueFileName(String originalFileName) {

@@ -1,16 +1,18 @@
 package com.project.ecommerce_youtube.request;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.project.ecommerce_youtube.model.Cart;
+import com.project.ecommerce_youtube.model.CartItems;
 
-@Data
-@NoArgsConstructor
-public class AddItemRequest {
+import java.util.HashSet;
+import java.util.Set;
+
+public class AddToCartRequest {
     private Long userId;
     private Long productId;
-    private String size;
+    private Cart cart;
+    private CartItems cartItems;
     private int quantity;
-    private Integer price;
+    private Double price;
 
     public Long getUserId() {
         return userId;
@@ -28,12 +30,12 @@ public class AddItemRequest {
         this.productId = productId;
     }
 
-    public String getSize() {
-        return size;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public int getQuantity() {
@@ -44,11 +46,19 @@ public class AddItemRequest {
         this.quantity = quantity;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public CartItems getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(CartItems cartItems) {
+        this.cartItems = cartItems;
     }
 }

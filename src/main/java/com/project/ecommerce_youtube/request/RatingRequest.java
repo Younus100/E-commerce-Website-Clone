@@ -1,6 +1,7 @@
 package com.project.ecommerce_youtube.request;
 
 public class RatingRequest {
+    private Long userId;
     private Long productId;
     private double rating;
 
@@ -18,5 +19,13 @@ public class RatingRequest {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

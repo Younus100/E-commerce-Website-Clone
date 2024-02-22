@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -165,5 +166,11 @@ public class ProductServiceImplementation implements ProductService {
 
         Page<Product> fillteredProducts = new PageImpl<>(pageContent,pageable,products.size());
         return null;
+    }
+
+    @Override
+    @Transactional
+    public void updateProductP(Product product) {
+        productRepository.save(product);
     }
 }

@@ -1,6 +1,7 @@
 package com.project.ecommerce_youtube.serviceImpl;
 
 import com.project.ecommerce_youtube.Reository.CartRepository;
+import com.project.ecommerce_youtube.exception.CartNotFoundException;
 import com.project.ecommerce_youtube.exception.ProductException;
 import com.project.ecommerce_youtube.model.Cart;
 import com.project.ecommerce_youtube.model.CartItems;
@@ -10,6 +11,7 @@ import com.project.ecommerce_youtube.request.AddItemRequest;
 import com.project.ecommerce_youtube.service.CartItemService;
 import com.project.ecommerce_youtube.service.CartService;
 import com.project.ecommerce_youtube.service.ProductService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,7 +36,7 @@ public class CartServiceImplementation implements CartService {
     }
 
     @Override
-    public String addCartItem(Long userId, AddItemRequest req) throws ProductException {
+    public String addCartItem(Long userId, AddItemRequest req) throws Exception {
         Cart cart = cartRepository.findByUserId(userId);
         Product product = productService.getProductById(req.getProductId());
         CartItems isPresent =cartItemService.isCartItemExist(cart,product,req.getSize(),userId);
@@ -49,9 +51,11 @@ public class CartServiceImplementation implements CartService {
 
             CartItems createdCartitem =  cartItemService.createcardItem(cartItems);
             cart.getCartItems().add(createdCartitem);
+        } else {
+            throw  new Exception("Item already Present");
         }
 
-        return "Item Add toCart";
+        return "Item Add to Cart";
     }
 
     @Override
@@ -71,5 +75,10 @@ public class CartServiceImplementation implements CartService {
         cart.setDiscount(totalPrice-discountedPrice);
 
         return cartRepository.save(cart);
+    }
+
+    @Transactional
+    public void clearCart(Long userId) {
+        cartRepository.deleteByUserId(userId);
     }
 }

@@ -1,6 +1,7 @@
 package com.project.ecommerce_youtube.service;
 
 import com.project.ecommerce_youtube.exception.OrderException;
+import com.project.ecommerce_youtube.exception.ProductException;
 import com.project.ecommerce_youtube.model.Address;
 import com.project.ecommerce_youtube.model.User;
 import com.project.ecommerce_youtube.model.POrder;
@@ -9,7 +10,7 @@ import com.project.ecommerce_youtube.model.POrder;
 import java.util.List;
 
 public interface OrderService {
-    POrder createOrder(User user, Address address);
+    POrder createOrder(User user, Address address) throws OrderException, ProductException;
 
     POrder findOrderById(Long orderid) throws OrderException;
 

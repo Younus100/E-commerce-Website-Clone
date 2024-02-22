@@ -1,6 +1,7 @@
 package com.project.ecommerce_youtube.controller;
 
 import com.project.ecommerce_youtube.exception.OrderException;
+import com.project.ecommerce_youtube.exception.ProductException;
 import com.project.ecommerce_youtube.model.Address;
 import com.project.ecommerce_youtube.model.POrder;
 import com.project.ecommerce_youtube.model.User;
@@ -22,7 +23,7 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<POrder> createOrder(@RequestBody User user, @RequestBody Address address) {
+    public ResponseEntity<POrder> createOrder(@RequestBody User user, @RequestBody Address address) throws OrderException, ProductException {
         POrder order = orderService.createOrder(user, address);
         return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }

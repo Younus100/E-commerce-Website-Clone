@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ratings")
+@RequestMapping("/pub/ratings")
 public class RatingController {
 
     private final RatingService ratingService;
@@ -27,8 +27,8 @@ public class RatingController {
     }
 
 
-    @PostMapping
-    public ResponseEntity<Rating> createRating(@RequestBody RatingRequest request, @RequestParam Long userId) throws UserException {
+    @PostMapping("/createrating")
+    public ResponseEntity<Rating> createRating(@RequestBody RatingRequest request, @RequestParam("id") Long userId) throws UserException {
         try {
             // Assuming you have a way to fetch the user by userId
             User user = userService.findUserById(userId);
