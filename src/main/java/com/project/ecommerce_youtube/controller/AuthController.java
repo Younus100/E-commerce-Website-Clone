@@ -1,11 +1,14 @@
 package com.project.ecommerce_youtube.controller;
 
+import com.project.ecommerce_youtube.Reository.CartRepository;
 import com.project.ecommerce_youtube.Reository.UserRepository;
 import com.project.ecommerce_youtube.config.JwtProvider;
 import com.project.ecommerce_youtube.exception.UserException;
+import com.project.ecommerce_youtube.model.Cart;
 import com.project.ecommerce_youtube.model.User;
 import com.project.ecommerce_youtube.request.LoginRequest;
 import com.project.ecommerce_youtube.response.AuthResponse;
+import com.project.ecommerce_youtube.serviceImpl.CartServiceImplementation;
 import com.project.ecommerce_youtube.serviceImpl.CustomerServiceImplementation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +23,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    public AuthController(JwtProvider jwtProvider, PasswordEncoder passwordEncoder, UserRepository userRepository, CustomerServiceImplementation customerServiceImplementation) {
+    public AuthController(JwtProvider jwtProvider, PasswordEncoder passwordEncoder, UserRepository userRepository, CustomerServiceImplementation customerServiceImplementation, CartServiceImplementation cartServiceImplementation) {
         this.jwtProvider = jwtProvider;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.customerServiceImplementation = customerServiceImplementation;
+        this.cartServiceImplementation = cartServiceImplementation;
     }
 
     private JwtProvider  jwtProvider;
@@ -37,6 +43,8 @@ public class AuthController {
     private UserRepository userRepository;
 
     private CustomerServiceImplementation customerServiceImplementation;
+
+    private CartServiceImplementation  cartServiceImplementation;
 
 
     @PostMapping("/signup")
@@ -56,8 +64,14 @@ public class AuthController {
         createduser.setPassword(passwordEncoder.encode(password));
         createduser.setFirstName(firstname);
         createduser.setLastName(lastname);
+        createduser.setCreatedAt(LocalDateTime.now());
+        
 
         User savedUser = userRepository.save(createduser);
+
+        cartServiceImplementation.createCart(savedUser);
+
+
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(),savedUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);

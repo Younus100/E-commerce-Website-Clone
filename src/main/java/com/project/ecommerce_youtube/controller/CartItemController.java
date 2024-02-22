@@ -1,16 +1,5 @@
 package com.project.ecommerce_youtube.controller;
 
-import com.project.ecommerce_youtube.exception.CartItemException;
-import com.project.ecommerce_youtube.exception.UserException;
-import com.project.ecommerce_youtube.model.CartItems;
-import com.project.ecommerce_youtube.service.CartItemService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-
-@RestController
-@RequestMapping("/cartitems")
 public class CartItemController {
 
     private final CartItemService cartItemService;

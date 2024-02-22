@@ -3,40 +3,26 @@ package com.project.ecommerce_youtube.controller;
 
 import com.project.ecommerce_youtube.exception.ProductException;
 import com.project.ecommerce_youtube.model.Product;
-import com.project.ecommerce_youtube.service.ProductService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import com.project.ecommerce_youtube.serviceImpl.ProductServiceImplementation;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("pub/")
 public class ProductController {
 
-    private final ProductService productService;
+    ProductServiceImplementation productServiceImplementation;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    public ProductController(ProductServiceImplementation productServiceImplementation) {
+        this.productServiceImplementation = productServiceImplementation;
     }
 
-    @GetMapping("/{productId}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long productId) {
-        try {
-            Product product = productService.getProductById(productId);
-            return ResponseEntity.ok(product);
-        } catch (ProductException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+    @GetMapping("/product/category")
+    public  List<Product> getProductById(@RequestParam("category") String name) throws ProductException {
+        return productServiceImplementation.findproductByCategory(name);
     }
 }
-//package com.project.ecommerce_youtube.controller;
-//
-//import com.project.ecommerce_youtube.model.Product;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//
-//@RequestMapping("/product")
-//public class ProductController {
-//
-//    @GetMapping("/product/{productid}")
-//    Product getProductById()
-//}
