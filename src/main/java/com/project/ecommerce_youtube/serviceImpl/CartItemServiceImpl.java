@@ -3,12 +3,15 @@ package com.project.ecommerce_youtube.serviceImpl;
 import com.project.ecommerce_youtube.Reository.CartItemRepository;
 import com.project.ecommerce_youtube.Reository.CartRepository;
 import com.project.ecommerce_youtube.exception.CartItemException;
+import com.project.ecommerce_youtube.exception.ProductException;
 import com.project.ecommerce_youtube.exception.UserException;
 import com.project.ecommerce_youtube.model.Cart;
 import com.project.ecommerce_youtube.model.CartItems;
 import com.project.ecommerce_youtube.model.Product;
 import com.project.ecommerce_youtube.model.User;
+import com.project.ecommerce_youtube.request.AddItemRequest;
 import com.project.ecommerce_youtube.service.CartItemService;
+import com.project.ecommerce_youtube.service.ProductService;
 import com.project.ecommerce_youtube.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +22,14 @@ public class CartItemServiceImpl implements CartItemService {
     private CartItemRepository cartItemRepository ;
     private UserService userService;
     private CartRepository cartRepository;
+    private final ProductService productService;
 
-    public CartItemServiceImpl(CartItemRepository cartItemRepository, UserService userService, CartRepository cartRepository) {
+
+    public CartItemServiceImpl(CartItemRepository cartItemRepository, UserService userService, CartRepository cartRepository,ProductService productService) {
         this.cartItemRepository = cartItemRepository;
         this.userService = userService;
         this.cartRepository = cartRepository;
+        this.productService = productService;
     }
 
     @Override
@@ -80,5 +86,29 @@ public class CartItemServiceImpl implements CartItemService {
 
         return cartItem.get();
     }
+
+    @Override
+    public String addCartItem(Long userId, AddItemRequest addItemRequest) throws CartItemException, UserException, ProductException {
+        // Check if the user exists
+        User user = userService.findUserById(userId);
+
+        // Fetch the product by its ID
+        Product product = productService.getProductById(addItemRequest.getProductId());
+
+        // Create a new CartItem
+        CartItems cartItem = new CartItems();
+        cartItem.setUserId(userId); // Set the user ID
+        cartItem.setProduct(product);
+        cartItem.setSize(addItemRequest.getSize());
+        cartItem.setQuantity(addItemRequest.getQuantity());
+        cartItem.setPrice(product.getPrice() * addItemRequest.getQuantity());
+        cartItem.setDiscountedPrice(product.getDiscountedPrice() * addItemRequest.getQuantity());
+
+        // Save the CartItem
+        cartItemRepository.save(cartItem);
+
+        return "Cart item added successfully";
+    }
+
 }
 

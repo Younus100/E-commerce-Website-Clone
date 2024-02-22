@@ -49,9 +49,10 @@ public class CartController {
     }
 
     @GetMapping("/getcart")
-    public ResponseEntity<Cart> findUserCart() {
+    public ResponseEntity<Cart> findUserCart(@RequestParam("id") long userId) {
         try {
-            Cart result = cartService.findUserCart(getUserIdFromAuthentication());
+//            Cart result = cartService.findUserCart(getUserIdFromAuthentication());
+            Cart result = cartService.findUserCart(userId);
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
